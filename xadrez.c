@@ -1,39 +1,90 @@
 #include <stdio.h>
 
-int main() {
-    // Movimento da torre: 5 casas para a direita 
-    printf("\n### Movimento da torre ###\n ");
-    for (int i = 0; i < 5; i++) {
-        printf("Direta\n");
-    }
-    // Movimento bispo: 5 casas na diagonal para cima e a direita
-    printf("\n### Movimento do bispo ###\n");
-    int j = 0;
-    while (j < 5) {
-        printf("Cima, direta\n");
-        j++;
-    }
-    //Movimento rainha: 8 casas para esquerda
-    printf("\n### Movimento da rainha ###\n");
-    int k = 0;
-    do {
-        printf("Esquerda\n");
-        k++;
-    } while (k < 8);
+// Movimento da torre: movendo para a direita
 
-    // Movimento do Cavalo: 2 casas para cima e 1 para a direita
-    printf("\n### Movimento do cavalo ###\n");
-    for (int x  = 0; x < 2; x++) {
-        printf("Cima\n");
-    }
-    int y = 0;
-    while (y < 1 )
-    {
+    void moverTorre(int casas) {
+    if (casas > 0) {
         printf("Direita\n");
-        y++;
+        moverTorre(casas - 1);
+    }
+}
+
+
+// Movimento da Rainha (mover para a esquerda)
+    void moverRainha(int casas) {
+    if (casas > 0) {
+        printf("Esquerda\n");
+        moverRainha(casas - 1);
+    }
+}
+
+
+
+// Movimento do Bispo: na diagonal superior direita
+    void moverBispo(int casas, int atual) {
+    if (atual < casas) {
+        
+        printf("Cima, Direita\n");
+        moverBispo(casas, atual + 1);
+    }
+}
+
+// Movimento do Bispo com loops aninhados
+    void moverBispoLoops(int casas) {
+    for (int i = 0; i < casas; i++) {
+        for (int j = 0; j <= i; j++) {
+            printf("Cima, Direita\n");
+      
+        }
+    }
+}
+
+// Movimento do Cavalo usando loops aninhados e controle de fluxo
+    void moverCavalo(int movimentos) {
+    for (int i = 0; i < movimentos; i++) {
+        int passos = 0;
+        for (int j = 0; j < 2; j++) { // O cavalo move-se 2 passos em uma direção
+            printf("Cima\n");
+            passos++;
+        }
+        printf("Direita\n"); // O cavalo então move-se 1 passo em direção perpendicular
+        printf(" --- Movimento completo do cavalo ---\n");
 
     }
-    
+
+}
+
+int main() {
+    int movimentoTorre = 5;
+    int movimentoBispo = 5;
+    int movimentoRainha = 8;
+    int movimentoCavalo = 3;
+
+
+
+    // Movimento da Torre
+    printf("\n### Movimento da Torre ###\n");
+    moverTorre(movimentoTorre);
+
+    // Movimento do Bispo (recursivo)
+    printf("\n### Movimento do Bispo (recursivo) ###\n");
+    moverBispo(movimentoBispo, 0);
+
+    // Movimento do Bispo (loops aninhados)
+    printf("\n### Movimento do Bispo (loops aninhados) ###\n");
+    moverBispoLoops(movimentoBispo);
+
+    // Movimento da Rainha
+    printf("\n### Movimento da Rainha ###\n");
+    moverRainha(movimentoRainha);
+
+
+    // Movimento do Cavalo
+    printf("\n### Movimento do Cavalo ###\n");
+    moverCavalo(movimentoCavalo);
+
+
+
 
 
     return 0;
